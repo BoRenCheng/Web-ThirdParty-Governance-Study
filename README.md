@@ -44,4 +44,7 @@ Longitudinal quantitative study on web third-party resource dependency and de-ri
 
 研究結果證實，隨著監管政策與資安意識提升，頂尖網站正呈現出明顯的 **「去風險化 」** 趨勢，即減少不必要的第三方依賴並提升供應商多樣性。
 
+* **相關文件**: [國科會大專生研究企劃](網站第三方資源依賴的縱貫性量化實證研究_治理策略矩陣與去風險化演進.pdf)
+
+
 
