@@ -46,5 +46,9 @@ Longitudinal quantitative study on web third-party resource dependency and de-ri
 
 * **國科會大專生研究企劃**: [網站第三方資源依賴的縱貫性量化實證研究_治理策略矩陣與去風險化演進](網站第三方資源依賴的縱貫性量化實證研究_治理策略矩陣與去風險化演進.pdf)
 
+---
+## 授權
+Copyright (c) 2026 Bo-Ren Cheng(BoRenCheng)
 
+本專案採用 MIT License 授權。
 
