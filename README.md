@@ -17,12 +17,12 @@ Longitudinal quantitative study on web third-party resource dependency and de-ri
 
 研究已從 Proposal 進入可實作階段，第一階段資料管線（抽樣 → 歷史快照 → 靜態解析 → TDI → 圖表）已完整跑通：
 
-- ✅ **Tranco 分層抽樣**：名單 ID [`74JZX`](https://tranco-list.eu/list/74JZX/1000000)，Tier1/2/3 分層、固定 seed=42 可重現，pilot_30 ⊆ pilot_100 ⊆ sample_full（1000 站）
-- ✅ **Wayback Machine 歷史重建**：2022 / 2024 / 2026 三時點，pilot_100 共 300 個快照任務，成功 166（55%）
-- ✅ **靜態解析與第三方偵測**：10,845 筆資源，其中第三方 4,452 筆；45 個網站具完整三年面板資料
-- ✅ **TDI 第一版**：平均 TDI 逐年上升（0.102 → 0.121 → 0.125）
-- ✅ 31 個單元測試全數通過；5 張初步圖表（見 [`figures/`](figures/)）
-- 🔜 **Phase 2**：TMI（追蹤強度）、SCI（供應商集中度）、Headless Chrome 動態校準
+-  **Tranco 分層抽樣**：名單 ID [`74JZX`](https://tranco-list.eu/list/74JZX/1000000)，Tier1/2/3 分層、固定 seed=42 可重現，pilot_30 ⊆ pilot_100 ⊆ sample_full（1000 站）
+-  **Wayback Machine 歷史重建**：2022 / 2024 / 2026 三時點，pilot_100 共 300 個快照任務，成功 166（55%）
+-  **靜態解析與第三方偵測**：10,845 筆資源，其中第三方 4,452 筆；45 個網站具完整三年面板資料
+-  **TDI 第一版**：平均 TDI 逐年上升（0.102 → 0.121 → 0.125）
+-  31 個單元測試全數通過；5 張初步圖表（見 [`figures/`](figures/)）
+-  **Phase 2**：TMI（追蹤強度）、SCI（供應商集中度）、Headless Chrome 動態校準
 
 詳細文件：
 
