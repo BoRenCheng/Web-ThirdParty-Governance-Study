@@ -205,3 +205,12 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ===== 專案專屬規則（website-governance-longitudinal-study） =====
+# 原始資料：Wayback HTML 快照與 Tranco 名單體積大，不進版本控制
+dataset/raw/
+# 執行紀錄
+logs/
+# 作業系統雜項
+.DS_Store
+Thumbs.db

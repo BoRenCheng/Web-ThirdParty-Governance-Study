@@ -13,6 +13,28 @@ Longitudinal quantitative study on web third-party resource dependency and de-ri
 
 ---
 
+## 目前實作進度：Phase 1 已完成（2026-07-14）
+
+研究已從 Proposal 進入可實作階段，第一階段資料管線（抽樣 → 歷史快照 → 靜態解析 → TDI → 圖表）已完整跑通：
+
+- ✅ **Tranco 分層抽樣**：名單 ID [`74JZX`](https://tranco-list.eu/list/74JZX/1000000)，Tier1/2/3 分層、固定 seed=42 可重現，pilot_30 ⊆ pilot_100 ⊆ sample_full（1000 站）
+- ✅ **Wayback Machine 歷史重建**：2022 / 2024 / 2026 三時點，pilot_100 共 300 個快照任務，成功 166（55%）
+- ✅ **靜態解析與第三方偵測**：10,845 筆資源，其中第三方 4,452 筆；45 個網站具完整三年面板資料
+- ✅ **TDI 第一版**：平均 TDI 逐年上升（0.102 → 0.121 → 0.125）
+- ✅ 31 個單元測試全數通過；5 張初步圖表（見 [`figures/`](figures/)）
+- 🔜 **Phase 2**：TMI（追蹤強度）、SCI（供應商集中度）、Headless Chrome 動態校準
+
+詳細文件：
+
+| 文件 | 內容 |
+|------|------|
+| [PHASE1.md](PHASE1.md) | Phase 1 完整說明：安裝、執行方式、專案架構、TDI 解釋 |
+| [docs/phase1_pilot_report.md](docs/phase1_pilot_report.md) | Pilot 執行報告（含自動統計與問題觀察） |
+| [docs/methodology_notes.md](docs/methodology_notes.md) | 方法論設計理由 |
+| [docs/data_dictionary.md](docs/data_dictionary.md) | 所有資料表的欄位定義 |
+
+---
+
 ## 核心量化指標 
 
 本研究定義了三項關鍵維度來衡量網站的第三方風險：

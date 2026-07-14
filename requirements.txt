@@ -1,0 +1,12 @@
+pandas
+numpy
+requests
+beautifulsoup4
+lxml
+tldextract
+matplotlib
+scipy
+statsmodels
+tqdm
+python-dotenv
+pytest
