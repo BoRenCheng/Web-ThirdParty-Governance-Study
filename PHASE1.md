@@ -4,20 +4,20 @@
 
 ---
 
-## 📌 專案狀態（2026-07-14 更新）：Phase 1 已完成 ✅
+## 專案狀態：Phase 1 已完成 
 
 | 項目 | 狀態 |
 |------|------|
-| 研究環境（.venv + requirements） | ✅ 已建置 |
-| 單元測試（pytest，31 個） | ✅ 全部通過 |
-| Tranco Top 1M 名單 | ✅ `dataset/raw/tranco/tranco_top_1m.csv`（1,000,000 筆，名單 ID `74JZX`，已填入 pilot report） |
-| 正式分層抽樣（pilot_30 / pilot_100 / sample_full） | ✅ 已完成（seed=42） |
-| pilot_30 完整管線 | ✅ 90 任務，成功 56（62%），TDI 趨勢 0.200 → 0.242 → 0.295 |
-| pilot_100 完整管線 | ✅ 300 任務，成功 166（55%），TDI 趨勢 0.102 → 0.121 → 0.125 |
-| 第三方偵測抽查 | ✅ Top 第三方網域合理（GTM、Google APIs、AWS、CloudFront、jsDelivr…） |
-| Phase 1 成功標準六個檔案 | ✅ 全部到位（目前輸出為 pilot_100 版本） |
+| 研究環境（.venv + requirements） |  已建置 |
+| 單元測試（pytest，31 個） |  全部通過 |
+| Tranco Top 1M 名單 |  `dataset/raw/tranco/tranco_top_1m.csv`（1,000,000 筆，名單 ID `74JZX`，已填入 pilot report） |
+| 正式分層抽樣（pilot_30 / pilot_100 / sample_full） |  已完成（seed=42） |
+| pilot_30 完整管線 |  90 任務，成功 56（62%），TDI 趨勢 0.200 → 0.242 → 0.295 |
+| pilot_100 完整管線 |  300 任務，成功 166（55%），TDI 趨勢 0.102 → 0.121 → 0.125 |
+| 第三方偵測抽查 |  Top 第三方網域合理（GTM、Google APIs、AWS、CloudFront、jsDelivr…） |
+| Phase 1 成功標準六個檔案 |  全部到位（目前輸出為 pilot_100 版本） |
 
-### 初步結果摘要（pilot_100，2026-07-14 執行）
+### 初步結果摘要（pilot_100）
 
 - 快照下載成功率 55%（166/300）；失敗幾乎都是 `missing_snapshot`（131），僅 3 個 `invalid_html`，無 timeout 最終失敗。
 - 解析出 10,845 筆資源，其中第三方 4,452 筆（41%）。
@@ -25,7 +25,7 @@
 - 平均 TDI 逐年上升（0.102 → 0.121 → 0.125），方向與「第三方依賴加深」假設一致；pilot 樣本僅供管線驗證，不可推論母體。
 - 注意：TDI 的 min-max 正規化以「該批資料」為基準，pilot_30 與 pilot_100 的 TDI 絕對值**不可互相比較**，只看各自批內的跨年趨勢。
 
-### ⚠️ Pilot 階段的重要發現
+###  Pilot 階段的重要發現
 
 各 Tier 快照成功率：Tier1 僅 **40%**（12/30），反而低於 Tier2/Tier3 的 57%。原因：**Tranco 前 1000 名包含大量基礎設施網域**（`akadns.net`、`fastly.net`、`googleapis.com` 等 CDN/DNS 網域），它們因被大量引用而排名高，但沒有真正的「首頁」可供 Wayback 存檔，嚴格說也不屬於「網站治理」的研究對象。**Phase 2 開始前需決定處理方式**：用 `included=0` 排除並在 `note` 註明，或在 `category` 標註後分開分析。
 
@@ -63,7 +63,7 @@ Phase 1 **只做**以下事情（刻意不做完整研究）：
 Phase 1 的核心就是讓這條管線穩定跑通：
 
 ```
-Tranco Top 1M（你手動下載）
+Tranco Top 1M（手動下載）
       │
       ▼  crawler/tranco_sampler.py（分層隨機抽樣，seed=42 可重現）
 pilot_30.csv / pilot_100.csv / sample_full.csv
@@ -123,57 +123,7 @@ website-governance-longitudinal-study/
 └── tests/             # pytest 單元測試
 ```
 
-## 5. 安裝方式（Windows PowerShell）
-
-在專案根目錄開 PowerShell（VS Code 內建終端機即可）：
-
-```powershell
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-之後每次開新終端機，記得先 `.venv\Scripts\activate` 啟動虛擬環境。
-
-驗證安裝：
-
-```powershell
-python -m scripts.init_dirs
-pytest
-```
-
-兩個都成功就代表環境沒問題。
-
-## 6. 如何準備 Tranco List
-
-> ✅ 本專案已完成此步驟（2026-07-14）。以下說明保留給重新下載名單時參考。
-
-1. 到 <https://tranco-list.eu/> 下載最新的 **Full list**（CSV，約 1,000,000 列，21~25 MB）。
-2. 下載的檔案通常叫 `top-1m.csv`，請**改名**後放到：
-
-   ```
-   dataset/raw/tranco/tranco_top_1m.csv
-   ```
-
-   也可以在 PowerShell 中執行：
-
-   ```powershell
-   Rename-Item dataset\raw\tranco\top-1m.csv tranco_top_1m.csv
-   ```
-
-3. 格式（無標題列或有標題列都支援）：
-
-   ```
-   rank,domain
-   1,google.com
-   2,youtube.com
-   ```
-
-> **重要**：請記下你下載的名單 ID（網頁上會顯示，例如 `Z3XVN`），寫進 `docs/phase1_pilot_report.md` 的 Sample 一節——這是研究可重現性的關鍵。
->
-> **Demo 模式**：還沒有 Tranco CSV、只想測試程式流程時，可執行 `python -m crawler.tranco_sampler --demo`。它會用隨機假網域產生樣本檔，**demo 產生的資料絕對不能當作研究結果**，拿到真實名單後請重跑正式抽樣。
-
-## 7. 如何執行第一階段
+## 5. 如何執行第一階段
 
 ### 方法 A：一步一步執行（了解每個步驟在做什麼）
 
@@ -220,7 +170,7 @@ python -m scripts.phase1_run_pipeline --sample dataset/processed/samples/pilot_3
 
 每個 CSV 的完整欄位說明見 [docs/data_dictionary.md](docs/data_dictionary.md)。
 
-## 9. TDI 指標解釋
+## 6. TDI 指標解釋
 
 **TDI（Third-party Dependency Index，第三方依賴度指標）第一版：**
 
@@ -240,7 +190,7 @@ TDI = 0.5 × script_norm + 0.5 × domain_norm
 
 「第三方」的判斷規則：比較網站與資源的 registrable domain（eTLD+1）。`cdn.example.com` 對 `example.com` 是**第一方**；`google-analytics.com` 對 `example.com` 是**第三方**。詳見 [docs/methodology_notes.md](docs/methodology_notes.md) 第 7 節。
 
-## 10. 目前限制
+## 7. 目前限制
 
 1. **只做靜態解析**：JavaScript 動態注入的第三方資源（例如透過 GTM 載入的追蹤器）抓不到，TDI 是低估值。
 2. **Wayback HTML 可能不完整**：部分快照可能缺漏資源或存到錯誤頁。
@@ -250,7 +200,7 @@ TDI = 0.5 × script_norm + 0.5 × domain_norm
 6. **尚未加入 Headless Chrome 動態校準**（Phase 2 才做，屆時才需安裝 Playwright）。
 7. 第三方判定未做公司實體對應（同公司不同網域會被算成第三方）。
 
-## 11. 下一階段（Phase 2+）
+## 8. 下一階段（Phase 2+）
 
 1. **Tracker classification**：用 EasyPrivacy / Tracker Radar 清單為第三方資源分類。
 2. **TMI**（Tracking & Monetization Index）：追蹤與變現強度指標。
@@ -259,18 +209,4 @@ TDI = 0.5 × script_norm + 0.5 × domain_norm
 5. **Headless Chrome 動態量測**：對當前網站量測動態載入資源，建立靜態→動態校準係數。
 6. **治理策略矩陣**：以 TDI × SCI / TMI 將網站定位到治理策略象限，完成研究核心產出。
 
----
 
-## 附：常見問題
-
-**Q：在 VS Code 打開 Tranco CSV 時跳出「exceeds the csv.maxFileSizeMB limit (10 MB)」警告？**
-這不是錯誤。VS Code 只是提醒「這個檔案很大，用 CSV 檢視器開會拖慢編輯器」。按 **Cancel** 關掉即可——Tranco CSV 不需要人工打開，程式會自己讀取。真的想看內容時按 Continue This Time，或改用終端機：`Get-Content dataset\raw\tranco\tranco_top_1m.csv -TotalCount 10`。
-
-**Q：跑到一半網路斷了怎麼辦？**
-重新執行 downloader 即可，它會整批重跑（pilot_30 規模小，重跑成本低）。每個網站的錯誤都只會記錄在 `error_message`，不會中斷整批。
-
-**Q：為什麼有些網站是 `missing_snapshot`？**
-Wayback Machine 沒有收錄該網站在該期間的快照，長尾網站（Tier3）與 2026 年特別常見。這本身就是研究資料（快照可用性），會呈現在 pilot report。
-
-**Q：`tests/` 在測什麼？**
-`pytest` 會驗證三個核心邏輯：網域解析（`cdn.example.com` → `example.com`）、第三方判斷（子網域=第一方、外部網域=第三方）、TDI 計算（欄位齊全、數值在 0~1、零第三方網站補 0）。改動程式後請先跑 `pytest` 再跑管線。
