@@ -13,7 +13,7 @@ Longitudinal quantitative study on web third-party resource dependency and de-ri
 
 ---
 
-## 目前實作進度：Phase 1 已完成（2026-07-14）
+## 目前實作進度：Phase 1 已完成
 
 研究已從 Proposal 進入可實作階段，第一階段資料管線（抽樣 → 歷史快照 → 靜態解析 → TDI → 圖表）已完整跑通：
 
