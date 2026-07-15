@@ -31,7 +31,7 @@
 
 ### 下一步（Phase 2）
 
-檢視 `figures/` 與 `docs/phase1_pilot_report.md` 後，依 [第 11 節](#11-下一階段phase-2) 依序加入 tracker 分類、TMI、SCI 與動態校準。
+檢視 `figures/` 與 `docs/phase1_pilot_report.md` 後，依 [第 8 節](#11-下一階段phase-2) 依序加入 tracker 分類、TMI、SCI 與動態校準。
 
 ---
 
